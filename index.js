@@ -8,12 +8,14 @@ var methodOverride = require('method-override');
 var morgan         = require('morgan');
 var mongoose       = require('mongoose');
 var jwt            = require('jsonwebtoken');
+var uuid           = require('node-uuid');
 
 // configuration ===========================================
 
 // config files
 var db = require('./config/db');
-var secret = require('./config/secret');
+require('./models/user');
+require('./config/passport');
 
 // set our port
 var port = process.env.PORT || 8080;
@@ -21,7 +23,7 @@ var port = process.env.PORT || 8080;
 // connect to our mongoDB database
 // (uncomment after you enter in your own credentials in config/db.js)
 mongoose.connect(db.url);
-app.set('superSecret', secret.secret);
+app.set('superSecret', uuid.v4());
 
 // get all data/stuff of the body (POST) parameters
 // parse application/json
