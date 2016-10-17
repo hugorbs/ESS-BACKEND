@@ -2,7 +2,7 @@ var passport = require('passport');
 var mongoose = require('mongoose');
 var User = mongoose.model('user');
 
-module.exports.login = function(app, req, res) {
+module.exports.login = function(secret, req, res) {
   passport.authenticate('user', function(err, user, info){
     var token;
     // If Passport throws/catches an error
@@ -13,7 +13,7 @@ module.exports.login = function(app, req, res) {
 
     // If a user is found
     if(user){
-      token = user.generateJwt(app);
+      token = user.generateJwt(secret);
 
       res.status(200);
       res.json({
@@ -26,14 +26,14 @@ module.exports.login = function(app, req, res) {
   })(req, res);
 };
 
-module.exports.add = function(app, req, res) {
+module.exports.add = function(secret, req, res) {
   console.log('add called');
   var user = new User();
 
   user.setFields(req);
 
   user.save(function(err) {
-    var token = user.generateJwt(app);
+    var token = user.generateJwt(secret);
     res.status(200);
     res.json({
       "token" : token
