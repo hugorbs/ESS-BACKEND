@@ -1,8 +1,12 @@
 var UserController = require('../controllers/userController');
 var mongoose       = require('mongoose');
+var cors           = require('cors');
 var User           = mongoose.model('user');
 
  module.exports = function(app, express, jwt) {
+     // enable CORS
+     app.use(cors());
+   
      // get an instance of the router for api routes
      var apiRoutes = express.Router();
 
