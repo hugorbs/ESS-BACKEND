@@ -15,6 +15,11 @@ var uuid           = require('node-uuid');
 // config files
 var db = require('./config/db');
 require('./models/user');
+require('./models/teacher');
+require('./models/frequency');
+require('./models/machine');
+require('./models/subject');
+require('./models/subjectUser');
 require('./config/passport');
 
 // set our port

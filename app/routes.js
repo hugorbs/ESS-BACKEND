@@ -1,4 +1,6 @@
 var UserController = require('../controllers/userController');
+var ConfigController = require('../controllers/configController');
+var FrequencyController = require('../controllers/frequencyController');
 var mongoose       = require('mongoose');
 var cors           = require('cors');
 var User           = mongoose.model('user');
@@ -6,13 +8,25 @@ var User           = mongoose.model('user');
  module.exports = function(app, express, jwt) {
      // enable CORS
      app.use(cors());
-   
+
      // get an instance of the router for api routes
      var apiRoutes = express.Router();
 
      // route to show a message (GET http://localhost:8080/)
      apiRoutes.get('/', function(req, res) {
        res.json({ message: 'Welcome!' });
+     });
+
+     apiRoutes.get('/setup', function(req, res){
+       ConfigController.setup(req, res);
+     });
+
+     apiRoutes.post('/frequency', function(req, res){
+       FrequencyController.register(req, res);
+     });
+
+     apiRoutes.get('/frequency', function(req, res){
+       FrequencyController.getFrequency(req, res);
      });
 
      apiRoutes.post('/users', function(req, res) {
