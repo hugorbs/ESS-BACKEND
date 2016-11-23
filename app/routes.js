@@ -25,8 +25,8 @@ var User           = mongoose.model('user');
        FrequencyController.register(req, res);
      });
 
-     apiRoutes.get('/frequency', function(req, res){
-       FrequencyController.getFrequency(req, res);
+     apiRoutes.get('/subjects', function(req, res){
+       FrequencyController.getSubjects(req, res);
      });
 
      apiRoutes.post('/users', function(req, res) {

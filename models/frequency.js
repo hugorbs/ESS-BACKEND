@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var frequencySchema = new mongoose.Schema({
     userId: String,
-    machineId: String,
+    subjectId: String,
     date: Date
 });
 

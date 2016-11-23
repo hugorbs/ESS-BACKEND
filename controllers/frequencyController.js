@@ -5,7 +5,7 @@ var Frequency = mongoose.model('frequency');
 module.exports.register = function(req, res){
   var frequency = new Frequency();
   frequency.userId = req.body.userId;
-  frequency.machineId = req.body.machineId;
+  frequency.subjectId = req.body.subjectId;
   frequency.date = req.body.date;
 
   frequency.save();
@@ -14,11 +14,9 @@ module.exports.register = function(req, res){
   res.send('OK');
 }
 
-module.exports.getFrequency = function(req, res){
-  var mySubjects;
+module.exports.getSubjects = function(req, res){
   Subject.find({}, {"name":1, "_id":0}, function(err, subjects) {
     if (!err) {
-      mySubjects = subjects;
       res.json(subjects);
     } else {
       res.json(err);
